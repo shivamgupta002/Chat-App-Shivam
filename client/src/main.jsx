@@ -7,7 +7,9 @@ import "./index.css";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <HelmetProvider>
-      <App />
+      <div onContextMenu={(e) => e.preventDefault()}>
+        <App />
+      </div>
     </HelmetProvider>
   </StrictMode>
 );

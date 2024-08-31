@@ -6,6 +6,6 @@ import { singleAvatar } from "../middlewares/multer.js";
 const app = express.Router();
 
 app.post("/new", singleAvatar, newUser);
-app.post("/new", login);
+app.post("/login", login);
 
 export default app;

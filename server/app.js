@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 
 import userRoutes from "./routes/user.js";
 import { connectDB } from "./utils/features.js";
+import { errorMiddleware } from "./middlewares/error.js";
 
 // Access Data from .env file
 dotenv.config({
@@ -24,6 +25,9 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 
+app.use(errorMiddleware);
+
+// Port Listening
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

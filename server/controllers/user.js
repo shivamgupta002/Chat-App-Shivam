@@ -34,14 +34,21 @@ const login = TryCatch(async (req, res, next) => {
 
   const user = await User.findOne({ username }).select("+password");
 
-  if (!user) return next(new ErrorHandler("Invalid username or Password", 404));
+  if (!user) return next(new ErrorHandler("Invalid username ", 404));
 
   const isMatch = await compare(password, user.password);
 
-  if (!isMatch)
-    return next(new ErrorHandler("Invalid username or Password", 404));
+  if (!isMatch) return next(new ErrorHandler("Invalid username ", 404));
 
   sendToken(res, user, 200, `Welcome Back,${user.name}`);
+});
+
+const getMyProfile = TryCatch(async (req, res) => {
+  const user = await User.findById(req.user);
+  res.status(200).json({
+    success: true,
+    user,
+  });
 });
 
 export { newUser, login, getMyProfile };
